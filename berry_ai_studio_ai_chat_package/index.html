@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080807">
+<title>Berry AI Studio — Create. Imagine. Build.</title>
+<style>
+:root{--bg:#080807;--panel:#11100d;--panel2:#17140e;--gold:#e8b85e;--gold2:#ffd98a;--line:#4b3819;--text:#f6f0e5;--muted:#b9b0a0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% -15%,#3c260c 0,transparent 36%),var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,textarea{font:inherit}button{cursor:pointer}
+.app{min-height:100vh;display:grid;grid-template-columns:230px 1fr}
+.sidebar{border-right:1px solid var(--line);padding:22px 14px;background:#090908;display:flex;flex-direction:column;gap:22px}
+.brand{display:flex;gap:10px;align-items:center;padding:0 8px 20px;border-bottom:1px solid #332713}.crown{font-size:30px;color:var(--gold)}.brand strong{font:700 19px Georgia,serif;letter-spacing:1.2px;display:block}.brand small{color:var(--gold);font-size:10px;letter-spacing:1px}
+.nav{display:grid;gap:6px}.nav button{border:1px solid transparent;background:transparent;color:#ded6c7;text-align:left;padding:11px 12px;border-radius:10px;display:flex;gap:12px;align-items:center}.nav button span:first-child{width:23px;text-align:center;color:var(--gold);font-size:17px}.nav button:hover,.nav button.active{background:linear-gradient(90deg,#4b3414,#20180b);border-color:#63491e;color:#ffe1a3}
+.sidebar-bottom{margin-top:auto;color:var(--muted);font-size:12px;padding:14px 9px;border-top:1px solid #332713}
+main{min-width:0}.topbar{height:74px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:20px;padding:0 28px;background:#090908d9;position:sticky;top:0;z-index:4;backdrop-filter:blur(12px)}.search{flex:1;max-width:650px;margin:auto}.search input{width:100%;border:1px solid #55452c;background:#0b0b09;color:white;border-radius:30px;padding:12px 18px;outline:none}.search input:focus,textarea:focus{border-color:var(--gold)}.profile{white-space:nowrap;color:var(--muted);font-size:12px}.profile b{color:white;font-size:14px}
+.content{padding:22px;max-width:1600px;margin:auto}.hero{min-height:280px;border:1px solid #684c20;border-radius:16px;padding:36px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 78% 40%,#6a4519 0,transparent 33%),linear-gradient(115deg,#17120a,#080807 65%);display:flex;align-items:center}.hero:after{content:"✦";position:absolute;right:10%;top:9%;font-size:150px;color:#c58b2e;opacity:.13}.hero-copy{max-width:600px;position:relative;z-index:1}.eyebrow{font-size:11px;letter-spacing:3px;color:var(--gold);font-weight:700}.hero h1{font:700 clamp(32px,4vw,50px)/1.08 Georgia,serif;margin:14px 0}.hero p{color:#d0c7b7;max-width:500px;margin-bottom:24px}.btn{border:1px solid #8f6728;background:linear-gradient(135deg,var(--gold2),#c68b32);color:#171006;font-weight:750;border-radius:30px;padding:11px 18px;box-shadow:0 5px 20px #a16d2220}.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.btn.secondary{background:transparent;color:var(--gold2);box-shadow:none;border-color:#715326;margin-left:8px}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:24px 2px 12px}.section-head h2{font-size:17px;margin:0}.section-head small{color:var(--muted)}
+.tools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.tool{border:1px solid var(--line);border-radius:13px;background:linear-gradient(145deg,#15120d,#0d0c0a);padding:17px 14px;min-height:150px;text-align:left;color:var(--text);transition:.2s}.tool:hover{border-color:var(--gold);transform:translateY(-2px)}.tool .icon{display:grid;place-items:center;width:40px;height:40px;border:1px solid #61471f;background:#2b200f;border-radius:12px;color:var(--gold2);font-size:21px;margin-bottom:11px}.tool b{display:block;margin-bottom:5px}.tool p{font-size:12px;color:var(--muted);margin:0}
+.workspace{margin-top:22px;border:1px solid var(--line);border-radius:15px;background:#0e0d0b;padding:22px;display:none}.workspace.show{display:block}.workspace h2{margin:0 0 6px;font:700 25px Georgia,serif}.workspace p{color:var(--muted);margin:0 0 18px}.workspace textarea{width:100%;min-height:115px;resize:vertical;border:1px solid #514126;background:#080807;color:white;border-radius:12px;padding:14px;outline:none}.workspace .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}.workspace select{background:#16130d;color:white;border:1px solid #514126;padding:10px;border-radius:9px}.output{margin-top:15px;padding:15px;border:1px dashed #554324;border-radius:10px;color:#cfc4b1;min-height:54px;white-space:pre-wrap}
+.lower{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-top:20px}.box{border:1px solid var(--line);background:#0e0d0b;border-radius:14px;padding:18px}.box h3{margin:0 0 14px;font-size:16px}.feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.feature{border:1px solid #392b17;border-radius:10px;padding:15px;background:linear-gradient(140deg,#1b160d,#0b0b09)}.feature strong{display:block;margin:6px 0}.feature small{color:var(--muted)}.badge{display:inline-block;color:var(--gold2);font-size:11px;border:1px solid #60461e;border-radius:20px;padding:3px 8px}
+.recent{display:grid;gap:10px}.recent-item{border-bottom:1px solid #292116;padding:8px 0;color:#e6ddcf}.recent-item small{display:block;color:var(--muted);font-size:12px}.footer{text-align:center;color:#8e8069;font-size:11px;padding:24px}
+.notice{border:1px solid #63491e;background:#21190d;color:#e9d5ad;padding:11px 13px;border-radius:10px;font-size:12px;margin-top:12px}
+@media(max-width:1100px){.tools{grid-template-columns:repeat(3,1fr)}.app{grid-template-columns:190px 1fr}.content{padding:16px}.topbar{padding:0 18px}}
+@media(max-width:700px){.app{display:block}.sidebar{padding:12px;border-right:0;border-bottom:1px solid var(--line);gap:12px}.brand{padding-bottom:10px}.nav{display:flex;overflow-x:auto;padding-bottom:4px}.nav button{white-space:nowrap;padding:8px 10px}.nav button span:first-child{width:auto}.sidebar-bottom{display:none}.topbar{height:62px;padding:0 12px;gap:10px}.profile{display:none}.content{padding:12px}.hero{padding:24px 20px;min-height:260px}.hero h1{font-size:34px}.tools{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.tool{padding:13px 11px;min-height:145px}.lower{grid-template-columns:1fr}.feature-grid{grid-template-columns:1fr}.workspace{padding:16px}.btn.secondary{margin-left:0;margin-top:8px}.hero .actions{display:flex;flex-wrap:wrap;gap:8px}.hero .btn.secondary{margin-top:0}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="crown">♛</div><div><strong>BERRY AI STUDIO</strong><small>CREATE • IMAGINE • BUILD</small></div></div>
+  <nav class="nav" aria-label="Main navigation">
+    <button class="active" data-target="dashboard"><span>⌂</span>Dashboard</button>
+    <button data-tool="chat"><span>◉</span>AI Chat</button>
+    <button data-tool="image"><span>▧</span>AI Image Generator</button>
+    <button data-tool="video"><span>▷</span>AI Video Generator</button>
+    <button data-tool="writer"><span>✎</span>AI Writer</button>
+    <button data-tool="coding"><span>⌘</span>AI Coding Assistant</button>
+    <button data-tool="voice"><span>♬</span>AI Voice</button>
+    <button data-target="creations"><span>▤</span>My Creations</button>
+    <button data-target="templates"><span>▦</span>Templates</button>
+  </nav>
+  <div class="sidebar-bottom">Your ideas, supercharged by AI.<br><br><span class="badge">Starter demo · No API keys</span></div>
+</aside>
+<main>
+<header class="topbar">
+  <div class="search"><input id="search" placeholder="⌕  Search tools or ask AI anything…" aria-label="Search tools"></div>
+  <div class="profile">♛ &nbsp; <b>Berry</b><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Free Starter</div>
+</header>
+<div class="content" id="dashboard">
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">WELCOME TO BERRY AI STUDIO</div>
+      <h1>All Your AI Tools<br>in One Place.</h1>
+      <p>Chat, create, write, and build. Bring your ideas to life with one creative workspace.</p>
+      <div class="actions"><button class="btn" data-tool="chat">Start creating&nbsp; →</button><button class="btn secondary" id="tour">Explore tools</button></div>
+    </div>
+  </section>
+  <div class="section-head"><h2>✦ Your creative toolkit</h2><small>Choose a tool to get started</small></div>
+  <section class="tools" id="toolCards">
+    <button class="tool" data-tool="chat"><span class="icon">◉</span><b>AI Chat</b><p>Ask questions, explore ideas, and brainstorm.</p></button>
+    <button class="tool" data-tool="image"><span class="icon">▧</span><b>AI Image</b><p>Turn descriptions into visual concepts.</p></button>
+    <button class="tool" data-tool="video"><span class="icon">▷</span><b>AI Video</b><p>Plan videos from prompts and scenes.</p></button>
+    <button class="tool" data-tool="writer"><span class="icon">✎</span><b>AI Writer</b><p>Draft stories, posts, scripts, and more.</p></button>
+    <button class="tool" data-tool="coding"><span class="icon">⌘</span><b>AI Coding</b><p>Plan, write, and improve code.</p></button>
+    <button class="tool" data-tool="voice"><span class="icon">♬</span><b>AI Voice</b><p>Prepare text for voice narration.</p></button>
+  </section>
+  <section class="workspace" id="workspace">
+    <h2 id="workTitle">AI Chat</h2><p id="workDesc">Describe what you want to create.</p>
+    <textarea id="prompt" placeholder="Type your idea here…"></textarea>
+    <div class="row"><select id="style"><option>Creative</option><option>Professional</option><option>Friendly</option><option>Cinematic</option><option>Concise</option></select><button class="btn" id="run">Create draft</button><button class="btn secondary" id="clear">Clear</button></div>
+    <div class="notice" id="notice">AI Chat and AI Writer use a server-side function after you deploy this project and configure OPENROUTER_API_KEY. Other tools are currently prompt-planning demos.</div>
+    <div class="output" id="output">Your draft will appear here.</div>
+  </section>
+  <div class="lower">
+    <section class="box" id="templates"><h3>✧ Quick-start templates</h3><div class="feature-grid">
+      <div class="feature"><span class="badge">WRITING</span><strong>YouTube video script</strong><small>Hook, scenes, narration, and call to action.</small><br><button class="btn secondary use-template" data-prompt="Write an engaging YouTube video script about: ">Use template</button></div>
+      <div class="feature"><span class="badge">IMAGE</span><strong>Fantasy world</strong><small>Build a detailed image-generation prompt.</small><br><button class="btn secondary use-template" data-prompt="Create a cinematic image prompt for a fantasy world featuring ">Use template</button></div>
+      <div class="feature"><span class="badge">VIDEO</span><strong>Short social video</strong><small>Plan a 30-second vertical video.</small><br><button class="btn secondary use-template" data-prompt="Plan a 30-second vertical social video about ">Use template</button></div>
+      <div class="feature"><span class="badge">CODING</span><strong>App idea planner</strong><small>Turn an idea into a build plan.</small><br><button class="btn secondary use-template" data-prompt="Create a step-by-step app development plan for ">Use template</button></div>
+    </div></section>
+    <section class="box" id="creations"><h3>▤ My Creations</h3><div class="recent" id="recent"><div class="recent-item">Welcome to your studio<small>Your saved drafts will appear here during this browser session.</small></div></div><div class="notice">This first version saves drafts only in the current page session. Refreshing may clear them.</div></section>
+  </div>
+  <div class="footer">♛ BERRY AI STUDIO &nbsp; • &nbsp; Bigger ideas. Better tools. A brighter future.</div>
+</div>
+</main>
+</div>
+<script>
+const toolInfo={
+ chat:{title:"AI Chat",desc:"Ask a question or describe an idea you want to explore.",placeholder:"What would you like help with?"},
+ image:{title:"AI Image Generator",desc:"Create a detailed prompt for an image-generation service.",placeholder:"Describe the image: subject, style, lighting, mood, colours…"},
+ video:{title:"AI Video Generator",desc:"Plan a video concept with scenes, movement, and mood.",placeholder:"Describe your video idea, length, format, and visual style…"},
+ writer:{title:"AI Writer",desc:"Draft text for posts, stories, articles, emails, or scripts.",placeholder:"What should we write? Include the audience and tone…"},
+ coding:{title:"AI Coding Assistant",desc:"Describe an app or coding task to turn into a clear build brief.",placeholder:"What are you building? Include platform and features…"},
+ voice:{title:"AI Voice",desc:"Prepare narration text and a voice direction for a text-to-speech tool.",placeholder:"Enter the text you want narrated…"}
+};
+const workspace=document.getElementById('workspace'), promptBox=document.getElementById('prompt'), output=document.getElementById('output');
+let activeTool='chat', drafts=[];
+function openTool(name){if(!toolInfo[name])return;activeTool=name;const t=toolInfo[name];document.getElementById('workTitle').textContent=t.title;document.getElementById('workDesc').textContent=t.desc;promptBox.placeholder=t.placeholder;workspace.classList.add('show');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tool===name));workspace.scrollIntoView({behavior:'smooth',block:'start'});promptBox.focus();}
+document.querySelectorAll('[data-tool]').forEach(b=>b.addEventListener('click',()=>openTool(b.dataset.tool)));
+document.querySelectorAll('[data-target]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x===b));document.getElementById(b.dataset.target).scrollIntoView({behavior:'smooth'});if(b.dataset.target==='creations')workspace.classList.remove('show')}));
+document.getElementById('tour').addEventListener('click',()=>document.getElementById('toolCards').scrollIntoView({behavior:'smooth'}));
+document.getElementById('clear').addEventListener('click',()=>{promptBox.value='';output.textContent='Your draft will appear here.'});
+document.getElementById('run').addEventListener('click', async ()=>{
+ const value=promptBox.value.trim();
+ if(!value){output.textContent='Add a prompt first, then choose Create draft.';promptBox.focus();return}
+ const style=document.getElementById('style').value, button=document.getElementById('run');
+ button.disabled=true;button.textContent='Working…';output.textContent='Connecting to AI…';
+ try{
+  if(activeTool==='chat'||activeTool==='writer'){
+   const r=await fetch('/.netlify/functions/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:value,tool:activeTool,style})});
+   const data=await r.json().catch(()=>({}));
+   if(!r.ok)throw new Error(data.error||`Request failed (${r.status})`);
+   output.textContent=data.reply||'The AI returned an empty response.';
+  }else{
+   const drafts={
+    image:`IMAGE PROMPT DRAFT\n${value}\n\nStyle: ${style}\nRefine composition, lighting, colour palette, atmosphere, and aspect ratio.`,
+    video:`VIDEO CONCEPT DRAFT\n${value}\n\nStyle: ${style}\n1. Opening hook\n2. Main sequence with 2–4 scenes\n3. Memorable closing\n\nActual video generation still needs a video service.`,
+    coding:`APP / CODE BRIEF\nGoal: ${value}\n\n1. Define users and problem.\n2. List screens and interactions.\n3. Choose a technology stack.\n4. Build and test a prototype.\n\nKeep API keys on the server.`,
+    voice:`VOICEOVER PREP\n${value}\n\nDirection: ${style}\nUse natural pacing and pauses. Actual audio generation needs a text-to-speech service.`
+   };output.textContent=drafts[activeTool]||'This tool is not connected yet.';
+  }
+  const recent=document.getElementById('recent');
+  if(recent){const item=document.createElement('div');item.className='recent-item';const strong=document.createElement('strong');strong.textContent=toolInfo[activeTool]?.title||activeTool;const small=document.createElement('small');small.textContent=value.slice(0,90);item.append(strong,small);recent.prepend(item);}
+ }catch(e){output.textContent='Could not connect to AI: '+e.message+'\\n\\nCheck that OPENROUTER_API_KEY is saved in Netlify and that this updated project, including its function files, has been deployed.';}
+ finally{button.disabled=false;button.textContent='Create draft';}
+});
+document.querySelectorAll('.use-template').forEach(b=>b.addEventListener('click',()=>{openTool(b.dataset.prompt.startsWith('Create a cinematic')?'image':b.dataset.prompt.startsWith('Plan a 30')?'video':b.dataset.prompt.startsWith('Create a step')?'coding':'writer');promptBox.value=b.dataset.prompt;promptBox.focus()}));
+document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Enter'){const q=e.target.value.toLowerCase();const match=Object.keys(toolInfo).find(k=>toolInfo[k].title.toLowerCase().includes(q)||k.includes(q));if(match)openTool(match);else{openTool('chat');promptBox.value=e.target.value}}});
+</script>
+</body>
+</html>
